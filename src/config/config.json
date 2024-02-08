@@ -1,0 +1,30 @@
+{
+  "development": {
+    "username": "root",
+    "password": "8molPYc3nlFNYJq",
+    "database": "db_wa_gateway",
+    "host": "165.22.104.10",
+    "port": "3305",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "port": "3305",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "port": "3305",
+    "dialect": "mysql"
+  },
+
+  "NODE_ENV": "development",
+  "JWT_SECRET": "secret",
+  "PORT": 3005
+}
