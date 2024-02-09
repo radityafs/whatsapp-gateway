@@ -19,13 +19,17 @@
     "joi": "^17.12.1",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.1",
-    "sequelize-typescript": "^2.1.6"
+    "qrcode": "^1.5.3",
+    "sequelize-typescript": "^2.1.6",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.11.16",
+    "@types/qrcode": "^1.5.5",
+    "@types/uuid": "^9.0.8",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"

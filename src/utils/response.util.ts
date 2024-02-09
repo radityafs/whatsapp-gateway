@@ -8,7 +8,7 @@ interface Pagination {
 }
 
 const response = {
-  success: (
+  success: async (
     res: Response,
     message: string,
     data: any,

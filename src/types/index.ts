@@ -66,3 +66,7 @@ export type MessageUpdated = WAMessageUpdate & {
     | "read"
     | "played";
 };
+
+export interface UserJwt {
+  id: number;
+}

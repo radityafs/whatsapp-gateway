@@ -14,15 +14,16 @@ import type {
   MessageUpdated,
   StartSessionParams,
   StartSessionWithPairingCodeParams,
-} from "../types";
-import { CALLBACK_KEY, CREDENTIALS, Messages } from "../utils/consts";
+} from "../../types";
+import { CALLBACK_KEY, CREDENTIALS, Messages } from "../../utils/consts";
 import {
   saveDocumentHandler,
   saveImageHandler,
   saveVideoHandler,
-} from "../utils/save-media";
-import WhatsappError from "../utils/error";
-import { parseMessageStatusCodeToReadable } from "../utils/message-status";
+} from "../../utils/save-media";
+import WhatsappError from "../../utils/error";
+import { parseMessageStatusCodeToReadable } from "../../utils/message-status";
+import Session from "../../models/Sessions";
 
 const sessions: Map<string, WASocket> = new Map();
 const callback: Map<string, Function> = new Map();
@@ -252,6 +253,7 @@ const isSessionExistAndRunning = (sessionId: string): boolean => {
   }
   return false;
 };
+
 const shouldLoadSession = (sessionId: string): boolean => {
   if (
     fs.existsSync(path.resolve(CREDENTIALS.DIR_NAME)) &&
@@ -312,6 +314,41 @@ export const onPairingCode = (
   callback.set(CALLBACK_KEY.ON_MESSAGE_UPDATED, listener);
 };
 
+export const listenChanges = () => {
+  onConnected((sessionId) => {
+    Session.update(
+      { status: "CONNECTED" },
+      {
+        where: {
+          sessionId,
+        },
+      }
+    );
+  });
+
+  onDisconnected((sessionId) => {
+    Session.update(
+      { status: "DISCONNECTED" },
+      {
+        where: {
+          sessionId,
+        },
+      }
+    );
+  });
+
+  onConnecting((sessionId) => {
+    Session.update(
+      { status: "CONNECTING" },
+      {
+        where: {
+          sessionId,
+        },
+      }
+    );
+  });
+};
+
 const Whatsapp = {
   startSession,
   startSessionWithPairingCode,
@@ -326,6 +363,7 @@ const Whatsapp = {
   onConnecting,
   onMessageUpdate,
   onPairingCode,
+  listenChanges,
 };
 
 export default Whatsapp;

@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import config from "../config/config.json";
-import Account from "../models/Account";
+import Session from "../models/Sessions";
 import User from "../models/User";
 type Mode = "development" | "test" | "production";
 type Dialect =
@@ -34,7 +34,7 @@ const database = {
         acquire: 30000,
         idle: 10000,
       },
-      models: [User, Account],
+      models: [User, Session],
       logging: false,
     });
 

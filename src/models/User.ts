@@ -6,7 +6,9 @@ import {
   AutoIncrement,
   Unique,
   AllowNull,
+  HasMany,
 } from "sequelize-typescript";
+import Session from "./Sessions";
 
 @Table({
   tableName: "users",
@@ -33,6 +35,9 @@ class User extends Model {
 
   @Column
   apiKey!: string;
+
+  @HasMany(() => Session)
+  sessions?: Session[];
 }
 
 export default User;
